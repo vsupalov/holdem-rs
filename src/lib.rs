@@ -2,10 +2,34 @@ extern crate cards;
 
 use cards::card::{Card};
 
-pub enum CardSlot {
+pub type CardSlot = Option<Card>;
+
+/*
+pub enum CardSlot { //TODO: this could be an option as well?
     Empty,
-    Card,
+    Card, //TODO: this is not working as expected
 }
+*/
+
+/*
+impl CardSlot {
+    pub fn expect_borrow(&self) -> &Card {
+        match self {
+            &CardSlot::Empty => panic!("You are trying to borrow a non-dealt card"),
+            x @ &CardSlot::Card => x
+        }
+    }
+}
+*/
+
+/*
+pub fn expectCard<'a>(cs: CardSlot) -> &'a Card {
+    match cs {
+        None => panic!("You are trying to borrow a non-dealt card"),
+        Some(ref x) => x
+    }
+}
+*/
 
 pub enum HandRankClass {
     HighCard,

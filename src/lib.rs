@@ -31,6 +31,7 @@ pub fn expectCard<'a>(cs: CardSlot) -> &'a Card {
 }
 */
 
+#[derive(Debug)]
 pub enum HandRankClass {
     HighCard,
     OnePair,

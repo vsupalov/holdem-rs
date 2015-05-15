@@ -2,34 +2,22 @@ extern crate cards;
 
 use cards::card::{Card};
 
-pub type CardSlot = Option<Card>;
+//TODO: this could be an option as well
+//pub type CardSlot = Option<Card>;
 
-/*
-pub enum CardSlot { //TODO: this could be an option as well?
+pub enum CardSlot {
     Empty,
-    Card, //TODO: this is not working as expected
+    Dealt(Card),
 }
-*/
 
-/*
 impl CardSlot {
     pub fn expect_borrow(&self) -> &Card {
         match self {
             &CardSlot::Empty => panic!("You are trying to borrow a non-dealt card"),
-            x @ &CardSlot::Card => x
+            &CardSlot::Dealt(ref x) => x
         }
     }
 }
-*/
-
-/*
-pub fn expectCard<'a>(cs: CardSlot) -> &'a Card {
-    match cs {
-        None => panic!("You are trying to borrow a non-dealt card"),
-        Some(ref x) => x
-    }
-}
-*/
 
 #[derive(Debug)]
 #[derive(PartialEq)] 
@@ -48,4 +36,3 @@ pub enum HandRankClass {
 
 pub struct HandCards(pub CardSlot, pub CardSlot);
 pub struct CommunityCards(pub CardSlot, pub CardSlot, pub CardSlot, pub CardSlot, pub CardSlot);
-//TODO: unwrap to go from cardSlot to card or panic?

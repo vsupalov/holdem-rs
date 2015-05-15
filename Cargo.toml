@@ -1,13 +1,13 @@
 [package]
 name = "holdem"
-version = "0.0.1"
+version = "0.1.0"
 authors = ["Vladislav Supalov <v.supalov@google.com>"]
 
 [lib]
 name = "holdem"
 
 [dependencies.cards]
-git = "file:///home/toasty/Code/Rust/cards-rs"
+git = "https://github.com/th4t/cards-rs.git"
 
 #[dependencies]
 #cards = "0.1.0"

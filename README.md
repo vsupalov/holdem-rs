@@ -4,12 +4,12 @@ A library for Rust containing Texas Hold'em specific types and logic (maybe in t
 
 The crate is called `holdem` and you can depend on it via cargo:
 
-## Related Crates
-* [cards-rs](https://github.com/th4t/cards-rs)
-* **holdem-rs**
-* [pokereval-rs](https://github.com/th4t/pokereval-rs)
-
 ```ini
 [dependencies.holdem]
 git = "https://github.com/th4t/holdem-rs.git"
 ```
+
+## Related Crates
+* [cards-rs](https://github.com/th4t/cards-rs)
+* **holdem-rs**
+* [pokereval-rs](https://github.com/th4t/pokereval-rs)

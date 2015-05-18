@@ -21,6 +21,7 @@ impl CardSlot {
 
 #[derive(Debug)]
 #[derive(PartialEq)] 
+#[derive(Eq, Hash)]
 pub enum HandRankClass {
     HighCard,
     OnePair,

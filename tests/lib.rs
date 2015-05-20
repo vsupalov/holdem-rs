@@ -1,7 +1,7 @@
 extern crate holdem;
 extern crate cards;
 
-use holdem::{CardSlot};
+use holdem::{CardSlot, HandRankClass};
 use cards::card::{Card, Value, Suit};
 
 #[test]
@@ -16,4 +16,10 @@ fn borrow_card() {
 fn borrow_card_fail() {
     let card_slot = CardSlot::Empty;
     let _card = card_slot.expect_borrow();
+}
+
+#[test]
+fn ordering_of_handrankclass() {
+    assert!(HandRankClass::HighCard < HandRankClass::FullHouse);
+    assert!(HandRankClass::StraightFlush == HandRankClass::StraightFlush);
 }

@@ -1,10 +1,12 @@
 extern crate cards;
 
+use std::cmp::{Ord};
+
 use cards::card::{Card};
 
-// TODO: impl ORDering?
 #[derive(Debug, PartialEq)]
 #[derive(Eq, Hash)]
+#[derive(PartialOrd, Ord)]
 pub enum HandRankClass {
     HighCard,
     OnePair,
@@ -17,22 +19,26 @@ pub enum HandRankClass {
     StraightFlush,
 }
 
-pub type HandRank = u32; // smaller values are "better", Cactus Kev convention
+// find maximum value to determine best hand
+// larger values are "better", inverting the Cactus Kev convention
+pub type HandRank = u16;
 
-//TODO: functions to compare hand ranks -> find best?
+pub const HAND_RANK_COUNT : u16 = 7462;
 
+// assumes there are HAND_RANK_COUNT distinct hand ranks, where the
+// largest are the most valuable. An inversion of cactus kev's ranks
 pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
     match *val {
-        x if x > 6185 => HandRankClass::HighCard,
-        x if x > 3325 => HandRankClass::OnePair,
-        x if x > 2467 => HandRankClass::TwoPair,
-        x if x > 1609 => HandRankClass::ThreeOfAKind,
-        x if x > 1599 => HandRankClass::Straight,
-        x if x > 322  => HandRankClass::Flush,
-        x if x > 166  => HandRankClass::FullHouse,
-        x if x > 10   => HandRankClass::FourOfAKind,
-        x if x > 0    => HandRankClass::StraightFlush,
-        _             => panic!("Unexpected hand rank value!")
+        x if x <= HAND_RANK_COUNT-6185 => HandRankClass::HighCard,
+        x if x <= HAND_RANK_COUNT-3325 => HandRankClass::OnePair,
+        x if x <= HAND_RANK_COUNT-2467 => HandRankClass::TwoPair,
+        x if x <= HAND_RANK_COUNT-1609 => HandRankClass::ThreeOfAKind,
+        x if x <= HAND_RANK_COUNT-1599 => HandRankClass::Straight,
+        x if x <= HAND_RANK_COUNT-322  => HandRankClass::Flush,
+        x if x <= HAND_RANK_COUNT-166  => HandRankClass::FullHouse,
+        x if x <= HAND_RANK_COUNT-10   => HandRankClass::FourOfAKind,
+        x if x <= HAND_RANK_COUNT-0    => HandRankClass::StraightFlush,
+        _                              => panic!("Unexpected hand rank value!")
     }
 }
 

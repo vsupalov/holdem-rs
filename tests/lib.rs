@@ -1,7 +1,7 @@
 extern crate holdem;
 extern crate cards;
 
-use holdem::{CardSlot, HandRankClass};
+use holdem::{CardSlot, HandRankClass, hand_rank_to_class};
 use cards::card::{Card, Value, Suit};
 
 #[test]
@@ -22,4 +22,14 @@ fn borrow_card_fail() {
 fn ordering_of_handrankclass() {
     assert!(HandRankClass::HighCard < HandRankClass::FullHouse);
     assert!(HandRankClass::StraightFlush == HandRankClass::StraightFlush);
+}
+
+#[test]
+fn hand_rank_to_class_conversion() {
+   assert_eq!(hand_rank_to_class(&0), HandRankClass::HighCard);
+   assert_eq!(hand_rank_to_class(&1276), HandRankClass::HighCard);
+   assert_eq!(hand_rank_to_class(&1277), HandRankClass::OnePair);
+   assert_eq!(hand_rank_to_class(&(1277+2860)), HandRankClass::TwoPair);
+   assert_eq!(hand_rank_to_class(&7451), HandRankClass::FourOfAKind);
+   assert_eq!(hand_rank_to_class(&7461), HandRankClass::StraightFlush);
 }

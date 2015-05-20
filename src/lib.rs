@@ -26,19 +26,30 @@ pub type HandRank = u16;
 pub const HAND_RANK_COUNT : u16 = 7462;
 
 // assumes there are HAND_RANK_COUNT distinct hand ranks, where the
-// largest are the most valuable. An inversion of cactus kev's ranks.
+// largest are the most valuable. Instead of leaving the largest ones as the worst (7462 to 1 inclusive)
+// let's invert this standard to be (0 to 7461 inclusive), where the largest is best.
+// numbers based on: http://www.suffecool.net/poker/evaluator.html
 pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
-    match *val {
-        x if x < HAND_RANK_COUNT-6185 => HandRankClass::HighCard,
-        x if x < HAND_RANK_COUNT-3325 => HandRankClass::OnePair,
-        x if x < HAND_RANK_COUNT-2467 => HandRankClass::TwoPair,
-        x if x < HAND_RANK_COUNT-1609 => HandRankClass::ThreeOfAKind,
-        x if x < HAND_RANK_COUNT-1599 => HandRankClass::Straight,
-        x if x < HAND_RANK_COUNT-322  => HandRankClass::Flush,
-        x if x < HAND_RANK_COUNT-166  => HandRankClass::FullHouse,
-        x if x < HAND_RANK_COUNT-10   => HandRankClass::FourOfAKind,
-        x if x <= HAND_RANK_COUNT-0    => HandRankClass::StraightFlush, //include the former zero (now HAND_RANK_COUNT)
-        x                             => panic!("Unexpected hand rank value! '{}'", x)
+    if *val < 1277 {
+        HandRankClass::HighCard
+    } else if *val < 1277+2860 {
+        HandRankClass::OnePair
+    } else if *val < 1277+2860+858 {
+        HandRankClass::TwoPair
+    } else if *val < 1277+2860+858+858 {
+        HandRankClass::ThreeOfAKind
+    } else if *val < 1277+2860+858+858+10 {
+        HandRankClass::Straight
+    } else if *val < 1277+2860+858+858+10+1277 {
+        HandRankClass::Flush
+    } else if *val < 1277+2860+858+858+10+1277+156 {
+        HandRankClass::FullHouse
+    } else if *val < 1277+2860+858+858+10+1277+156+156 {
+        HandRankClass::FourOfAKind
+    } else if *val < 1277+2860+858+858+10+1277+156+156+10 {
+        HandRankClass::StraightFlush
+    } else {
+        panic!("Unexpected hand rank value! '{}'", *val)
     }
 }
 

@@ -37,7 +37,7 @@ pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
         x if x < HAND_RANK_COUNT-322  => HandRankClass::Flush,
         x if x < HAND_RANK_COUNT-166  => HandRankClass::FullHouse,
         x if x < HAND_RANK_COUNT-10   => HandRankClass::FourOfAKind,
-        x if x < HAND_RANK_COUNT-0    => HandRankClass::StraightFlush,
+        x if x <= HAND_RANK_COUNT-0    => HandRankClass::StraightFlush, //include the former zero (now HAND_RANK_COUNT)
         x                             => panic!("Unexpected hand rank value! '{}'", x)
     }
 }

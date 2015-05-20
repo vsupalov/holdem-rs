@@ -3,8 +3,7 @@ extern crate cards;
 use cards::card::{Card};
 
 // TODO: impl ORDering?
-#[derive(Debug)]
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 #[derive(Eq, Hash)]
 pub enum HandRankClass {
     HighCard,

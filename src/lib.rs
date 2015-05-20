@@ -29,15 +29,15 @@ pub const HAND_RANK_COUNT : u16 = 7462;
 // largest are the most valuable. An inversion of cactus kev's ranks
 pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
     match *val {
-        x if x < HAND_RANK_COUNT-6185 => HandRankClass::HighCard,
-        x if x < HAND_RANK_COUNT-3325 => HandRankClass::OnePair,
-        x if x < HAND_RANK_COUNT-2467 => HandRankClass::TwoPair,
-        x if x < HAND_RANK_COUNT-1609 => HandRankClass::ThreeOfAKind,
-        x if x < HAND_RANK_COUNT-1599 => HandRankClass::Straight,
-        x if x < HAND_RANK_COUNT-322  => HandRankClass::Flush,
-        x if x < HAND_RANK_COUNT-166  => HandRankClass::FullHouse,
-        x if x < HAND_RANK_COUNT-10   => HandRankClass::FourOfAKind,
-        x if x < HAND_RANK_COUNT-0    => HandRankClass::StraightFlush,
+        x if x <= HAND_RANK_COUNT-6185 => HandRankClass::HighCard,
+        x if x <= HAND_RANK_COUNT-3325 => HandRankClass::OnePair,
+        x if x <= HAND_RANK_COUNT-2467 => HandRankClass::TwoPair,
+        x if x <= HAND_RANK_COUNT-1609 => HandRankClass::ThreeOfAKind,
+        x if x <= HAND_RANK_COUNT-1599 => HandRankClass::Straight,
+        x if x <= HAND_RANK_COUNT-322  => HandRankClass::Flush,
+        x if x <= HAND_RANK_COUNT-166  => HandRankClass::FullHouse,
+        x if x <= HAND_RANK_COUNT-10   => HandRankClass::FourOfAKind,
+        x if x <= HAND_RANK_COUNT-0    => HandRankClass::StraightFlush,
         _                              => panic!("Unexpected hand rank value!")
     }
 }

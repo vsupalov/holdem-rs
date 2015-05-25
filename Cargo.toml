@@ -8,6 +8,3 @@ name = "holdem"
 
 [dependencies.cards]
 git = "https://github.com/th4t/cards-rs.git"
-
-#[dependencies]
-#cards = "0.1.0"

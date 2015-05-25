@@ -1,9 +1,12 @@
+//! holdem-rs contains more or less common types and functions used by other poker related libraries.
+
 extern crate cards;
 
 use std::cmp::{Ord};
 
 use cards::card::{Card};
 
+/// All hand rank classes that a 5-card hand can be worth in Texas Hold'em.
 #[derive(Debug, PartialEq)]
 #[derive(Eq, Hash)]
 #[derive(PartialOrd, Ord)]
@@ -19,16 +22,18 @@ pub enum HandRankClass {
     StraightFlush,
 }
 
-// find maximum value to determine best hand
-// larger values are "better", inverting the Cactus Kev convention
-pub type HandRank = u16;
+/// A card encoded using the bit pattern described in Cactus Kev's
+/// [article](http://www.suffecool.net/poker/evaluator.html).
+pub type CactusKevCard = u32;
 
+/// A value representing the strength of a hand. The higheer, the better.
+/// The numbers go from 0 to 7461 inclusive.
+pub type HandRank = u16;
 pub const HAND_RANK_COUNT : u16 = 7462;
 
-// assumes there are HAND_RANK_COUNT distinct hand ranks, where the
-// largest are the most valuable. Instead of leaving the largest ones as the worst (7462 to 1 inclusive)
-// let's invert this standard to be (0 to 7461 inclusive), where the largest is best.
-// numbers based on: http://www.suffecool.net/poker/evaluator.html
+/// Translates a hand rank to a rank class.
+/// assumes there are HAND_RANK_COUNT distinct hand ranks, where the
+/// largest are the most valuable. Numbers based on: http://www.suffecool.net/poker/evaluator.html
 pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
     if *val < 1277 {
         HandRankClass::HighCard
@@ -53,6 +58,8 @@ pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
     }
 }
 
+// TODO: this could be an option just as well.
+/// When a card can be either delt or pending.
 pub enum CardSlot {
     Empty,
     Dealt(Card),

@@ -13,3 +13,4 @@ git = "https://github.com/th4t/holdem-rs.git"
 * [cards-rs](https://github.com/th4t/cards-rs)
 * **holdem-rs**
 * [pokereval-rs](https://github.com/th4t/pokereval-rs)
+* [pokerlookup-rs](https://github.com/th4t/pokerlookup-rs)

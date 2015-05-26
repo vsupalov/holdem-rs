@@ -25,7 +25,7 @@ pub type CactusKevCard = u32;
 
 /// A value representing the strength of a hand. The higheer, the better.
 /// The numbers go from 0 to 7461 inclusive.
-pub type HandRank = u16;
+pub type HandRank = u16; //TODO: struct HandRank(u16); //TODO: pub?
 pub const HAND_RANK_COUNT : u16 = 7462;
 
 /// Translates a hand rank to a rank class.

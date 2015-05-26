@@ -8,4 +8,4 @@ name = "holdem"
 
 [dependencies.cards]
 git = "https://github.com/th4t/cards-rs.git"
-rev = "75666740f4c3a210f00cf5ebfd07e1cbed212152"
+rev = "532e786e054d9e9482f8b774daf4436d9cc28349"

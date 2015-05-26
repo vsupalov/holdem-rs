@@ -1,10 +1,7 @@
 //! holdem-rs contains more or less common types and functions used by other poker related libraries.
 
 extern crate cards;
-
 use std::cmp::{Ord};
-
-use cards::card::{Card};
 
 /// All hand rank classes that a 5-card hand can be worth in Texas Hold'em.
 #[derive(Debug, PartialEq)]
@@ -35,44 +32,16 @@ pub const HAND_RANK_COUNT : u16 = 7462;
 /// assumes there are HAND_RANK_COUNT distinct hand ranks, where the
 /// largest are the most valuable. Numbers based on: http://www.suffecool.net/poker/evaluator.html
 pub fn hand_rank_to_class(val: &HandRank) -> HandRankClass {
-    if *val < 1277 {
-        HandRankClass::HighCard
-    } else if *val < 1277+2860 {
-        HandRankClass::OnePair
-    } else if *val < 1277+2860+858 {
-        HandRankClass::TwoPair
-    } else if *val < 1277+2860+858+858 {
-        HandRankClass::ThreeOfAKind
-    } else if *val < 1277+2860+858+858+10 {
-        HandRankClass::Straight
-    } else if *val < 1277+2860+858+858+10+1277 {
-        HandRankClass::Flush
-    } else if *val < 1277+2860+858+858+10+1277+156 {
-        HandRankClass::FullHouse
-    } else if *val < 1277+2860+858+858+10+1277+156+156 {
-        HandRankClass::FourOfAKind
-    } else if *val < 1277+2860+858+858+10+1277+156+156+10 {
-        HandRankClass::StraightFlush
-    } else {
-        panic!("Unexpected hand rank value! '{}'", *val)
+    match *val {
+        0...1276 => HandRankClass::HighCard,
+        1277...4136 => HandRankClass::OnePair,
+        4137...4994 => HandRankClass::TwoPair,
+        4995...5852 => HandRankClass::ThreeOfAKind,
+        5853...5862 => HandRankClass::Straight,
+        5863...7139 => HandRankClass::Flush,
+        7140...7295 => HandRankClass::FullHouse,
+        7296...7451 => HandRankClass::FourOfAKind,
+        7452...7461 => HandRankClass::StraightFlush,
+        _ => panic!("Unexpected hand rank value! '{}'", *val)
     }
 }
-
-// TODO: this could be an option just as well.
-/// When a card can be either delt or pending.
-pub enum CardSlot {
-    Empty,
-    Dealt(Card),
-}
-
-impl CardSlot {
-    pub fn expect_borrow(&self) -> &Card {
-        match self {
-            &CardSlot::Empty => panic!("You are trying to borrow a non-dealt card"),
-            &CardSlot::Dealt(ref x) => x
-        }
-    }
-}
-
-pub struct HandCards(pub CardSlot, pub CardSlot);
-pub struct CommunityCards(pub CardSlot, pub CardSlot, pub CardSlot, pub CardSlot, pub CardSlot);

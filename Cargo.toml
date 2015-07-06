@@ -1,11 +1,14 @@
 [package]
 name = "holdem"
 version = "0.1.0"
-authors = ["Vladislav Supalov <v.supalov@google.com>"]
+authors = ["Vladislav Supalov <v.supalov@gmail.com>"]
+keywords = ["cards", "poker"]
+description = "Texas Hold'em specific types and logic."
+license = "MIT"
+readme = "README.md"
 
 [lib]
 name = "holdem"
 
-[dependencies.cards]
-git = "https://github.com/th4t/cards-rs.git"
-rev = "532e786e054d9e9482f8b774daf4436d9cc28349"
+[dependencies]
+cards = "1.1.0"

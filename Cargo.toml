@@ -1,6 +1,6 @@
 [package]
 name = "holdem"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Vladislav Supalov <v.supalov@gmail.com>"]
 keywords = ["cards", "poker"]
 description = "Texas Hold'em specific types and logic."
@@ -12,4 +12,4 @@ readme = "README.md"
 name = "holdem"
 
 [dependencies]
-cards = "1.1.1"
+cards = "1.1.2"
